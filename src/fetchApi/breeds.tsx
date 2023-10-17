@@ -1,4 +1,5 @@
-import { Breed, QueryParams } from "@/types/common";
+import { QueryParams } from "@/types/common";
+import { Breed } from "@/types/breeds";
 import catApiClient from "./api";
 
 export const getBreeds = async (queryParams: QueryParams = {}) => {

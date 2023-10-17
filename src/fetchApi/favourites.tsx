@@ -1,15 +1,15 @@
 import { QueryParams } from "@/types/common";
 import {
-  Favourite,
-  FavouriteResp,
-  CreateFavouriteResp,
-  DeleteResp,
+  FavouriteInstance,
+  GetFavourite,
+  CreateFavourite,
+  DeleteFavourite,
 } from "@/types/favourites";
 import catApiClient from "./api";
 
 export const getFavourites = async (queryParams: QueryParams = {}) => {
   try {
-    const { data } = await catApiClient.get<FavouriteResp[]>("/favourites", {
+    const { data } = await catApiClient.get<GetFavourite[]>("/favourites", {
       params: queryParams,
     });
     return data;
@@ -18,9 +18,9 @@ export const getFavourites = async (queryParams: QueryParams = {}) => {
   }
 };
 
-export const createFavourite = async (favourite: Favourite) => {
+export const createFavourite = async (favourite: FavouriteInstance) => {
   try {
-    const { data } = await catApiClient.post<CreateFavouriteResp>(
+    const { data } = await catApiClient.post<CreateFavourite>(
       "/favourites",
       favourite
     );
@@ -32,7 +32,7 @@ export const createFavourite = async (favourite: Favourite) => {
 
 export const getFavourite = async (favouriteId: string) => {
   try {
-    const { data } = await catApiClient.get<FavouriteResp>(
+    const { data } = await catApiClient.get<GetFavourite>(
       `/favourites/${favouriteId}`
     );
     return data;
@@ -43,7 +43,7 @@ export const getFavourite = async (favouriteId: string) => {
 
 export const deleteFavourite = async (favouriteId: string) => {
   try {
-    const { data } = await catApiClient.delete<DeleteResp>(
+    const { data } = await catApiClient.delete<DeleteFavourite>(
       `/favourites/${favouriteId}`
     );
     return data;
