@@ -1,17 +1,20 @@
 import catApiClient from "./api";
 import { QueryParams } from "@/types/common";
-import { GetImage, GetOwnImage, CreateImageResp } from "@/types/images";
-
-type Image = {
-  file: Blob;
-  sub_id?: string;
-};
+import {
+  GetImageResponse,
+  GetOwnImageResponse,
+  CreateImageResponse,
+  ImageInstance,
+} from "@/types/images";
 
 export const getImages = async (queryParams: QueryParams = {}) => {
   try {
-    const { data } = await catApiClient.get<GetImage[]>("/images/search", {
-      params: queryParams,
-    });
+    const { data } = await catApiClient.get<GetImageResponse[]>(
+      "/images/search",
+      {
+        params: queryParams,
+      }
+    );
     return data;
   } catch (err) {
     console.log(err);
@@ -20,7 +23,7 @@ export const getImages = async (queryParams: QueryParams = {}) => {
 
 export const getOwnImages = async (queryParams: QueryParams = {}) => {
   try {
-    const { data } = await catApiClient.get<GetOwnImage[]>("/images", {
+    const { data } = await catApiClient.get<GetOwnImageResponse[]>("/images", {
       params: queryParams,
     });
     return data;
@@ -29,9 +32,9 @@ export const getOwnImages = async (queryParams: QueryParams = {}) => {
   }
 };
 
-export const createImage = async (image: Image) => {
+export const createImage = async (image: ImageInstance) => {
   try {
-    const { data } = await catApiClient.post<CreateImageResp>(
+    const { data } = await catApiClient.post<CreateImageResponse>(
       "/images/upload",
       image,
       {
