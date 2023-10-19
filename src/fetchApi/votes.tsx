@@ -1,10 +1,14 @@
 import { QueryParams } from "@/types/common";
-import { Vote, VoteResp, CreateVoteResp } from "@/types/votes";
+import {
+  VoteInstance,
+  GetVoteResponse,
+  CreateVoteResponse,
+} from "@/types/votes";
 import catApiClient from "./api";
 
 export const getVotes = async (queryParams: QueryParams = {}) => {
   try {
-    const { data } = await catApiClient.get<VoteResp[]>("/votes", {
+    const { data } = await catApiClient.get<GetVoteResponse[]>("/votes", {
       params: queryParams,
     });
     return data;
@@ -13,9 +17,12 @@ export const getVotes = async (queryParams: QueryParams = {}) => {
   }
 };
 
-export const createVote = async (vote: Vote) => {
+export const createVote = async (vote: VoteInstance) => {
   try {
-    const { data } = await catApiClient.post<CreateVoteResp>("/votes", vote);
+    const { data } = await catApiClient.post<CreateVoteResponse>(
+      "/votes",
+      vote
+    );
     return data;
   } catch (err) {
     console.log(err);
