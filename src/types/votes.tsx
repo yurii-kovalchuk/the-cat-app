@@ -1,23 +1,26 @@
-import { Image } from "./images";
-
-export enum VoteValue {
-  UpVote = 1,
-  DownVote = -1,
-}
-
 export type Vote = {
-  id: string;
   image_id: string;
-  sub_id?: string | null;
-  created_at: string;
-  value: VoteValue;
-  country_code: string;
-  image: Pick<Image, "id" | "url">;
-  message: string;
+  sub_id?: string;
+  value: 1 | -1;
 };
 
-export type VoteInstance = Pick<Vote, "image_id" | "sub_id" | "value">;
+export type VoteResp = {
+  id: string;
+  image_id: string;
+  sub_id: string | null;
+  created_at: string;
+  value: string;
+  country_code: string;
+  image: {
+    id: string;
+    url: string;
+  };
+};
 
-export type GetVoteResponse = Omit<Vote, "message">;
-
-export type CreateVoteResponse = Omit<Vote, "created_at" | "image">;
+export type CreateVoteResp = {
+  message: string;
+  id: string;
+  image_id: string;
+  value: 1 | -1;
+  country_code: string;
+};
