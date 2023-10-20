@@ -1,29 +1,15 @@
 import catApiClient from "./api";
 import { QueryParams } from "@/types/common";
-import {
-  GetImageResponse,
-  GetOwnImageResponse,
-  CreateImageResponse,
-  ImageInstance,
-} from "@/types/images";
+import { GetImage, GetOwnImage, CreateImageResp } from "@/types/images";
+
+type Image = {
+  file: Blob;
+  sub_id?: string;
+};
 
 export const getImages = async (queryParams: QueryParams = {}) => {
   try {
-    const { data } = await catApiClient.get<GetImageResponse[]>(
-      "/images/search",
-      {
-        params: queryParams,
-      }
-    );
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const getOwnImages = async (queryParams: QueryParams = {}) => {
-  try {
-    const { data } = await catApiClient.get<GetOwnImageResponse[]>("/images", {
+    const { data } = await catApiClient.get<GetImage[]>("/images/search", {
       params: queryParams,
     });
     return data;
@@ -32,9 +18,20 @@ export const getOwnImages = async (queryParams: QueryParams = {}) => {
   }
 };
 
-export const createImage = async (image: ImageInstance) => {
+export const getOwnImages = async (queryParams: QueryParams = {}) => {
   try {
-    const { data } = await catApiClient.post<CreateImageResponse>(
+    const { data } = await catApiClient.get<GetOwnImage[]>("/images", {
+      params: queryParams,
+    });
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const createImage = async (image: Image) => {
+  try {
+    const { data } = await catApiClient.post<CreateImageResp>(
       "/images/upload",
       image,
       {
