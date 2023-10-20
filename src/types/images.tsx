@@ -1,27 +1,27 @@
-import { Breed } from "./breeds";
-import { Categorie } from "./common";
+import { Breed } from "./common";
 
-export type Image = {
+export type ImagesResp = {
   id: string;
   url: string;
   width: string;
   height: string;
-  mime_type: string;
-  entities?: [];
-  animals?: [];
-  categories?: Categorie[];
   breeds: Breed[];
-  pending: string;
-  approved: string;
+  categories?: {
+    id: string;
+    name: string;
+  }[];
 };
 
-export type GetImage = Pick<
-  Image,
-  "breeds" | "categories" | "id" | "url" | "width" | "height"
->;
-
-export type GetOwnImage = Omit<Image, "pending" | "approved" | "breeds"> & {
-  breeds: {
+export type OwnImagesResp = {
+  id: string;
+  url: string;
+  width: string;
+  height: string;
+  mime_type?: string;
+  entities?: [];
+  animals?: [];
+  categories?: [];
+  breeds?: {
     id: string;
     name: string;
     wikipedia_url: string;

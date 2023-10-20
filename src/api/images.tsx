@@ -1,6 +1,6 @@
 import catApiClient from "./api";
 import { QueryParams } from "@/types/common";
-import { GetImage, GetOwnImage, CreateImageResp } from "@/types/images";
+import { ImagesResp, OwnImagesResp, CreateImageResp } from "@/types/images";
 
 type Image = {
   file: Blob;
@@ -9,7 +9,7 @@ type Image = {
 
 export const getImages = async (queryParams: QueryParams = {}) => {
   try {
-    const { data } = await catApiClient.get<GetImage[]>("/images/search", {
+    const { data } = await catApiClient.get<ImagesResp[]>("/images/search", {
       params: queryParams,
     });
     return data;
@@ -20,7 +20,7 @@ export const getImages = async (queryParams: QueryParams = {}) => {
 
 export const getOwnImages = async (queryParams: QueryParams = {}) => {
   try {
-    const { data } = await catApiClient.get<GetOwnImage[]>("/images", {
+    const { data } = await catApiClient.get<OwnImagesResp[]>("/images", {
       params: queryParams,
     });
     return data;
