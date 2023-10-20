@@ -1,9 +1,9 @@
-import { QueryParams } from "@/types/common";
+import { Breed, QueryParams } from "@/types/common";
 import catApiClient from "./api";
 
 export const getBreeds = async (queryParams: QueryParams = {}) => {
   try {
-    const { data } = await catApiClient.get("/breeds", {
+    const { data } = await catApiClient.get<Breed[]>("/breeds", {
       params: queryParams,
     });
     return data;
@@ -14,7 +14,7 @@ export const getBreeds = async (queryParams: QueryParams = {}) => {
 
 export const getBreed = async (breedId: string) => {
   try {
-    const { data } = await catApiClient.get(`/favourites/${breedId}`);
+    const { data } = await catApiClient.get<Breed>(`/favourites/${breedId}`);
     return data;
   } catch (err) {
     console.log(err);
