@@ -15,7 +15,7 @@ export const getBreeds = async (queryParams: QueryParams = {}) => {
 
 export const getBreed = async (breedId: string) => {
   try {
-    const { data } = await catApiClient.get<Breed>(`/favourites/${breedId}`);
+    const { data } = await catApiClient.get<Breed>(`/breeds/${breedId}`);
     return data;
   } catch (err) {
     console.log(err);
